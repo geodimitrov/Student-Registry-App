@@ -26,3 +26,14 @@ jobs:
     
     - name: Run Tests
       run: npm test
+
+  deploy-app:
+    name: Deploy App
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to render.com
+        uses: johnbeynon/render-deploy-action@v0.0.8
+        with:
+          service-id: ${{ secrets.SERVICE_ID }}
+          api-key: ${{ secrets.API_TOKEN }}
+          wait-for-success: true
