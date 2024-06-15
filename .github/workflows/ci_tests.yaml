@@ -7,7 +7,8 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  run-integration-test:
+    name: Run Integration Tests
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -15,5 +16,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Run Tests with Node.js ${{ matrix.node-version }}
-    - run: npm test
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with: 
+        node-version: ${{ matrix.node.version }}
+
+    - name: Install packages
+      run: npm install
+    
+    - name: Run Tests
+      run: npm test
