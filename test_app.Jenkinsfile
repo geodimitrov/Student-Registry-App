@@ -1,10 +1,26 @@
 pipeline {
     agent any
     stages {
-        stage('Check Node.js version'){
+        stage('Install dependencies'){
             steps {
-                sh "node --version" 
+                sh "npm install" 
             }
+        }
+        stage('Start App') {
+            steps {
+                sh "npm run start &"
+            }
+        }
+        stage('Run Tests') {
+            steps {
+                sh "npm run test"
+            }
+        }
+    }
+    post {
+        always {
+            echo 'Cleaning workspace'
+            cleanWs()
         }
     }
 }
