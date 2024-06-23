@@ -1,9 +1,9 @@
 pipeline {
     agent any
     stages {
-        stage('Check python version'){
+        stage('Check Node.js version'){
             steps {
-                sh "python3 --version"
+                sh "node --version" 
             }
         }
     }
